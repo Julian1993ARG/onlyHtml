@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <script>
+// fetch("http://localhost:49873/cd4dbc2351ef441b8c44ba3803e5a8ad/browserLinkSignalR/negotiate?requestUrl=http%3A%2F%2Flocalhost%3A48237%2FAccount%2FLogin%2F%3FReturnUrl%3D%252F&browserName=&userAgent=Mozilla%2F5.0+(Windows+NT+10.0%3B+Win64%3B+x64)+AppleWebKit%2F537.36+(KHTML%2C+like+Gecko)+Chrome%2F126.0.0.0+Safari%2F537.36&browserIdKey=window.browserLink.initializationData.browserId&browserId=415c-b515&clientProtocol=1.3&_=1718846230431").then(response => {
+//     console.log(response);
+// }).catch(error => console.error('Error:', error));
+
+fetch('http://localhost:48237/Account/Login', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Content-Length': '42',
+        'Content-Type': 'application/json',
+        'Host': 'localhost:48237',
+        'Origin': 'http://127.0.0.1:5500',
+        'Referer': 'http://127.0.0.1:5500/Account/Login/?ReturnUrl=%2F',
+        'Sec-Ch-Ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify({
+        Username: 'test',
+        Password: 'serenity'
+    }),
+})
+.then(response => {
+    // Aquí obtienes las cookies de la respuesta
+    const cookies = response.headers.get('Set-Cookie');
+    console.log('Cookies:', cookies);
+    console.log(response.headers);
+
+    // Si necesitas el cuerpo de la respuesta, puedes convertirlo a JSON
+    return response.json().then(data => {
+        console.log('Response data:', data);
+    });
+})
+.catch(error => console.error('Error:', error));
+
+fetch("http://localhost:48237/Services/Bna/BnaCurrencies/List",{
+    method: "POST",
+    headers: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Content-Length': '42',
+        'Content-Type': 'application/json',
+        'Host': 'localhost:48237',
+        'Origin': 'http://127.0.0.1:5500',
+        'Referer': 'http://127.0.0.1:5500/Account/Login/?ReturnUrl=%2F',
+        'Sec-Ch-Ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify({
+    "Take": 100,
+    "Sort": [
+        ""
+    ],
+    "IncludeColumns": [
+        "Currency",
+        "Buy",
+        "Sell",
+        "Date",
+        "Bill"
+    ]
+}),
+}).then(response => {
+    console.log(response);
+}).catch(error => console.error('Error:', error));
+
+fetch("http://localhost:48237/Services/Bna/BnaCurrencies/Create",{
+    method: "POST",
+    headers: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Content-Length': '42',
+        'Content-Type': 'application/json',
+        'Host': 'localhost:48237',
+        'Origin': 'http://127.0.0.1:5500',
+        'Referer': 'http://127.0.0.1:5500/Account/Login/?ReturnUrl=%2F',
+        'Sec-Ch-Ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: JSON.stringify({"Entity":{"Currency":"DesdeOtraPag","Buy":500,"Sell":500,"Bill":false}}),
+}).then(response => {
+    console.log(response);
+}).catch(error => console.error('Error:', error));
+
+
+// const myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/json");
+
+// const raw = JSON.stringify({
+//   "Username": "test",
+//   "Password": "serenity"
+// });
+
+// const requestOptions = {
+//   method: "POST",
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: "follow",
+//   credentials: 'include',
+//   SameSite: 'None', // Send cookies with cross-origin requests
+//   mode: 'cors', // Send cookies with cross-origin requests
+//   cache: 'no-cache',
+// };
+
+// fetch("http://localhost:48237/Account/Login", requestOptions)
+//   .then((response) => {
+//     console.log(response);
+//     const cookies = response.headers.get('Set-Cookie');
+//     console.log('Cookies:', cookies); // This will still not work for HttpOnly or Secure cookies if accessed from a different origin without proper CORS settings
+//   })
+//   .catch((error) => console.error(error));
+
+//   var data = JSON.stringify({
+//   "Username": "test",
+//   "Password": "serenity"
+// });
+
+// var xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
+
+// xhr.addEventListener("readystatechange", function() {
+//   if(this.readyState === 4) {
+//     console.log(this.responseText);
+//   }
+// });
+
+// xhr.open("POST", "http://localhost:48237/Account/Login");
+// xhr.setRequestHeader("Content-Type", "application/json");
+
+// xhr.send(data);
+  </script>
+</body>
+</html>
